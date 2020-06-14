@@ -16,7 +16,7 @@
 @property (atomic, retain) id <IJKMediaPlayback> player;
 @property (weak, nonatomic) UIView *PlayerView;          //这里用了weak？？？？
 
-@property (nonatomic, strong) UIImageView *dimIamge;
+@property (nonatomic, strong) UIImageView *dimImage;
 @property (nonatomic, assign) int number;
 @property (nonatomic, assign) CGFloat heartSize;
 
@@ -54,14 +54,15 @@
 
 // 加载图
 - (void)loadingView {
-    self.dimIamge = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    self.dimImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
 //    [_dimIamge sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://img.ikstatic.cn/MTU4OTQ0MDYxMDYyOSM1ODUjanBn.jpg"]]];
-    [_dimIamge sd_setImageWithURL:[NSURL URLWithString:self.imageUrl]];
+    [_dimImage sd_setImageWithURL:[NSURL URLWithString:self.imageUrl]];
+    _dimImage.contentMode = UIViewContentModeScaleAspectFill;
     UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    visualEffectView.frame = _dimIamge.bounds;
-    [_dimIamge addSubview:visualEffectView];
-    [self.view addSubview:_dimIamge];
+    visualEffectView.frame = _dimImage.bounds;
+    [_dimImage addSubview:visualEffectView];
+    [self.view addSubview:_dimImage];
     NSLog(@"加载背景图");
     
 }
@@ -108,7 +109,7 @@
 
 - (void)moviePlayBackStateDidChange:(NSNotification*)notification {
     if ([self.player isPlaying]) {
-        _dimIamge.hidden = YES;
+        _dimImage.hidden = YES;
     }
 //    _dimIamge.hidden = YES;
 

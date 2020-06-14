@@ -199,9 +199,10 @@
         //        self.liveAddrs = addrSet;                                        //将获取到的数据转成模型，并保存到数组中
         
         NSArray *liveAddrDicts = [dataDicts valueForKey:@"live_addr"];
-        LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
-        [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
-        
+        if (liveAddrDicts != nil && ![liveAddrDicts isKindOfClass:[NSNull class]] && liveAddrDicts.count != 0){
+            LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
+            [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
+        }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
