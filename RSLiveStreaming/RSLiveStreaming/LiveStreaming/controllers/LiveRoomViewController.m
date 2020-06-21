@@ -58,6 +58,7 @@
 //    [_dimIamge sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://img.ikstatic.cn/MTU4OTQ0MDYxMDYyOSM1ODUjanBn.jpg"]]];
     [_dimImage sd_setImageWithURL:[NSURL URLWithString:self.imageUrl]];
     _dimImage.contentMode = UIViewContentModeScaleAspectFill;
+    _dimImage.clipsToBounds = YES;
     UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     visualEffectView.frame = _dimImage.bounds;
